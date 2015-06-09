@@ -78,8 +78,9 @@ class MetricBuffer:
         continue
 
       # If buffer is active, then compute it.
-      if buffer.active:
-        value = self.aggregation_func(buffer.values)
+      active = filter(lambda x: not(x is None), buffer.values)
+      if active:
+        value = self.aggregation_func(active)
         datapoint = (buffer.interval, value)
         state.events.metricGenerated(self.metric_path, datapoint)
         instrumentation.increment('aggregation.datapoints_generated')
