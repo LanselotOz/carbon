@@ -133,7 +133,7 @@ def write_cached_datapoints():
       database.write(metric, datapoints)
       write_micros = (time.time() - t) * ONE_MILLION
     except:
-      log.err("database write operation failed")
+      log.err("Write failed: %s. datapoint: %s" % (e, metric))
       instrumentation.increment('writer.write_errors')
     else:
       write_ratelimit.increment()
