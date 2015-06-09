@@ -87,7 +87,7 @@ class MetricDatagramReceiver(MetricReceiver, DatagramProtocol):
 
 
 class MetricPickleReceiver(MetricReceiver, Int32StringReceiver):
-  MAX_LENGTH = 2 ** 20
+  MAX_LENGTH = (2 ** 20) * 10
 
   def connectionMade(self):
     MetricReceiver.connectionMade(self)
